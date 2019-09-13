@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拼图游戏</title>
+    <style type="text/css">
+        div{
+            width:900px;
+        }
+        img{
+            float:left;
+            width:200px;
+            height:200px;
+            margin:10px;
+        }
+        body{
+            font-size:28px;
+        }
+    </style>
+</head>
+<body>
+   <script type="text/javascript">
+
+       window.onload=function() {
+           var imgs = ["images/a1.jpg", "images/a2.jpg", "images/a3.jpg", "images/a4.jpg",
+               "images/a5.jpg", "images/a6.jpg", "images/a7.jpg", "images/a8.jpg"];
+           var content = "";
+           for (var i = 0; i < imgs.length; i++) {
+               content = content + "<img src='" + imgs[i] + "'/>";
+           }
+           document.getElementById("div").innerHTML = content;
+           var imgs__=document.getElementsByTagName("img");
+           for(var i in imgs){
+               /**
+               imgs__[i].onmouseover=function(){
+                  this.src="images/a0.png";
+               };
+               imgs__[i].onmouseout=function(){
+                   this.src=imgs[i];
+               }**/
+               (function(i){
+                   imgs__[i].onmouseover=function(){
+                       this.src="images/a0.jpeg";
+                   };
+                   imgs__[i].onmouseout=function(){
+                       this.src=imgs[i];
+                   }
+                   imgs__[i].onclick=function(){
+                       sessionStorage.setItem("image",imgs[i]);
+                       var items=document.getElementsByName("level");
+                       for( var j in items){
+                           if (items[j].checked){sessionStorage.setItem("level",items[j].value);
+                               break;
+                           }
+                       }
+                       window.location.href="pintu.html";
+                   }
+               })(i);
+           }
+       }
+
+
+   </script>
+   <h1>请选择拼图的难度！</h1>
+   <input type="radio" name="level" value="4" checked />4*4 &nbsp;&nbsp;&nbsp;&nbsp;
+   <input type="radio" name="level" value="6"  />6*6&nbsp;&nbsp;&nbsp;&nbsp;
+   <input type="radio" name="level" value="10"  />10*10
+   <h1>请选择你要拼的图！</h1>
+<div id="div">
+</div>
+</body>
+</html>
